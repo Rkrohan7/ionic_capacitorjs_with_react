@@ -7,6 +7,36 @@
   transform: translateY(-50%);
 }
 
+#container form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+#container label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#container input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+#container button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#container button:hover {
+  background-color: #45a049;
+}
+
 #container strong {
   font-size: 20px;
   line-height: 26px;
@@ -21,4 +51,8 @@
 
 #container a {
   text-decoration: none;
+}
+
+.myname {
+  color: red;
 }
