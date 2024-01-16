@@ -11,92 +11,58 @@ import {
     IonTitle,
     IonToolbar,
     useIonRouter,
+    IonToast,
 } from '@ionic/react';
 import { logInOutline, personCircle } from 'ionicons/icons';
 import logo from '../assets/multigenesys_logo.jpeg';
 import axios from 'axios';
 
 const inData = {
-    username: "",
-    password: "",
-}
+    username: '',
+    password: '',
+};
+
 const Login: React.FC = () => {
     const router = useIonRouter();
     const [formData, setFormData] = useState(inData);
+    const [showErrorToast, setShowErrorToast] = useState(false);
 
-//     const handleLogin = async (e: React.FormEvent) => {
-//         e.preventDefault();
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
 
-//         const data = {
-//             username: formData.username,
-//             password: formData.password,
-
-//         }
-//         console.log(formData.username);
-//         console.log(formData.password);
-
-//         try {
-//             const response = await axios.post('http://192.168.1.12:8080/api/authenticate', data, {
-//                 headers: {
-//                        'Content-Type': 'application/json',
-//                 },
-//             });
-
-//             if(response.status===200){
-//        router.push('/home');
-//             }
-
-// console.log(response);
-
-//         } catch (error) {
-//             console.error('An error occurred during login', error);
-//         }
-
-//   // 'Authorization': `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTcwNTQwNDU4MX0.H73_EB8MASW3O2D4XxxOdQ_DpiQD2R0F6Ec-YJOFa0KQH-RKscrz71LmtmqXboMcxj9NyC8sDJRZdULnppsSxw`,
-               
-//         // console.log(response);
-
-//         // if (response.status === 200) {
-//         //     const data = response.data;
-//         //     console.log('Login successful', data);
-//         //     // router.push('/home');
-//         // } else {
-//         //     console.error('Login failed', response.statusText);
-//         // }
-
-//     };
-
-const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const data = {
-        username: formData.username,
-        password: formData.password,
-    };
-
-    console.log(formData.username);
-    console.log(formData.password);
-
-    try {
-        const response = await axios.post('http://192.168.1.12:8080/api/authenticate', data, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        console.log(response.status);
-        
-        if (response.status === 200) {
-           
-            router.push('/home');
+        // Basic validation
+        if (!formData.username || !formData.password) {
+            setShowErrorToast(true);
+            return;
         }
 
-        console.log(response);
+        const data = {
+            username: formData.username,
+            password: formData.password,
+        };
 
-    } catch (error) {
-        console.error('An error occurred during login', error);
-    }
-};
+        try {
+            const response = await axios.post('http://192.168.1.17:8080/api/authenticate', data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            console.log(response.status);
+
+            if (response.status === 200) {
+                setFormData(inData);
+                router.push('/home');
+            }else{
+                window.location.reload();
+            }
+
+            console.log(response);
+        } catch (error) {
+            console.error('An error occurred during login', error);
+            setShowErrorToast(true);
+        }
+    };
 
     return (
         <IonPage>
@@ -130,7 +96,7 @@ const handleLogin = async (e: React.FormEvent) => {
                                 type="password"
                                 className="ion-margin-top"
                                 value={formData.password}
-                                onIonChange={(e) => setFormData({ ...formData, password: e.detail.value! })}
+                                onIonChange={(e) => setFormData(prevState => ({ ...prevState, password: e.detail.value! }))}
                             ></IonInput>
                             <IonButton type="submit" expand="block" className="ion-margin-top">
                                 Login
@@ -141,6 +107,13 @@ const handleLogin = async (e: React.FormEvent) => {
                                 <IonIcon icon={personCircle} slot="end" />
                             </IonButton>
                         </form>
+                        <IonToast
+                            isOpen={showErrorToast}
+                            onDidDismiss={() => setShowErrorToast(false)}
+                            message="Invalid username or password. Please try again."
+                            duration={3000}
+                            color="danger"
+                        />
                     </IonCardContent>
                 </IonCard>
             </IonContent>
