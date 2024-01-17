@@ -12,8 +12,9 @@ import {
     IonToolbar,
     useIonRouter,
     IonToast,
+    IonButtons,
 } from '@ionic/react';
-import { logInOutline, personCircle } from 'ionicons/icons';
+import { arrowForward, logInOutline, personCircle } from 'ionicons/icons';
 import logo from '../assets/multigenesys_logo.jpeg';
 import axios from 'axios';
 
@@ -53,7 +54,7 @@ const Login: React.FC = () => {
             if (response.status === 200) {
                 setFormData(inData);
                 router.push('/home');
-            }else{
+            } else {
                 window.location.reload();
             }
 
@@ -63,6 +64,10 @@ const Login: React.FC = () => {
             setShowErrorToast(true);
         }
     };
+
+    const goToSplash = async()=>{
+        router.push('/SplashScreens')
+    }
 
     return (
         <IonPage>
@@ -106,6 +111,10 @@ const Login: React.FC = () => {
                                 Create Account
                                 <IonIcon icon={personCircle} slot="end" />
                             </IonButton>
+                            <IonButtons color="secondary" className="ion-margin-top " slot="end" onClick={goToSplash}>
+                                go to splash screen
+                                <IonIcon icon={arrowForward} slot="end" />
+                            </IonButtons>
                         </form>
                         <IonToast
                             isOpen={showErrorToast}

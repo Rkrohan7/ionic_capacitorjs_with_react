@@ -64,7 +64,7 @@ const Location: React.FC = () => {
                         <strong>Address:</strong> {address}
                     </div>
                 )}
-                <div id="map" style={{ height: '800px' }} />
+                <div id="map" style={{ height: '500px' }} />
                 {latitude && longitude && (
                    <MapContainer center={[latitude, longitude]} zoom={13} style={{ height: '300px' }}>
                         <TileLayer

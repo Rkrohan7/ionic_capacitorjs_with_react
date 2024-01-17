@@ -6,7 +6,13 @@ const config: CapacitorConfig = {
   webDir: 'dist',
   server: {
     androidScheme: 'http'
-  }
+  },
+  plugins: {
+    SplashScreen: {
+      launchShowDuration: 2000,
+      autoHideSplash: true
+    }
+  },
 };
 
 export default config;

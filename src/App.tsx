@@ -24,6 +24,7 @@ import './theme/variables.css';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Location from './pages/location';
+import SplashScreens from './pages/splashScreens';
 
 setupIonicReact();
 
@@ -37,6 +38,7 @@ const App: React.FC = () => (
         <Route component={Register} path={"/register"} exact/>
         <Route component={Home} path={"/home"} exact/>
         <Route component={Location} path={"/location"} exact/>
+        <Route component={SplashScreens} path={"/SplashScreens"} exact/>
         
       </IonRouterOutlet>
     </IonReactRouter>

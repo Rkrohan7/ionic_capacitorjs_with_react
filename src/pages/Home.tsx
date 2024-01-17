@@ -23,7 +23,7 @@ const Home: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWJJZCI6Miwic3ViIjoidXNlciIsImV4cCI6MTcwNTQ3Mzc4MCwiYXV0aCI6IlJPTEVfVVNFUiIsImlhdCI6MTcwNTM4NzM4MH0.1fIn4REQeQUMBkBkSxj0aJJha6N4JMTuSB24JNQ5rxEW8scA_jyr2Wb0XFG7erAKQ-OQ0iCA3cFnqviq4bJlPQ';
+                const token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWJJZCI6Miwic3ViIjoidXNlciIsImV4cCI6MTcwNTU2MTg0OSwiYXV0aCI6IlJPTEVfVVNFUiIsImlhdCI6MTcwNTQ3NTQ0OX0.6Sq-eYFDGpBNRTDAueg9Nq5sQHjJeUd4_QVb436foFGiDLeQfos3Z6ZV8h9SIksTKwRzFOHw9GB0b4Hs2eDR8A';
                 const response = await axios.get('http://192.168.1.17:8080/api/plans', {
                     headers: {
                       'Content-Type': 'application/json',
